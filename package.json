@@ -1,0 +1,24 @@
+{
+  "name": "amazonreports",
+  "version": "1.0.0",
+  "description": "Amazon Seller Central reporting application",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "node src/index.js",
+    "dev": "nodemon src/index.js"
+  },
+  "dependencies": {
+    "amazon-sp-api": "^0.8.0",
+    "axios": "^1.6.0",
+    "cors": "^2.8.5",
+    "dotenv": "^16.3.1",
+    "express": "^4.18.2",
+    "moment": "^2.29.4",
+    "chart.js": "^4.3.0",
+    "winston": "^3.10.0",
+    "csv-parser": "^3.0.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.1"
+  }
+}
