@@ -1,0 +1,29 @@
+# .gitignore - Prevents sensitive files from being committed to git
+
+# Environment variables and credentials
+.env
+.env.local
+.env.*.local
+
+# Logs
+logs
+*.log
+npm-debug.log*
+
+# Dependencies
+node_modules/
+package-lock.json
+
+# Generated reports
+/reports/
+
+# Runtime data
+pids
+*.pid
+*.seed
+*.pid.lock
+
+# Misc
+.DS_Store
+.idea/
+.vscode/
