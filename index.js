@@ -1,5 +1,5 @@
-const express = require('express');
-const dotenv = require('dotenv');
+import express from 'express';
+import dotenv from 'dotenv';
 const fetch = global.fetch;
 
 dotenv.config();
@@ -101,4 +101,4 @@ app.listen(PORT, () => {
   console.log(`Server running at http://localhost:${PORT}`);
 });
 
-module.exports = { getAccessToken, getMarketplaceParticipations };
+export { getAccessToken, getMarketplaceParticipations };
