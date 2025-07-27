@@ -51,7 +51,7 @@ class AmazonApiService {
         },
         options: {
           auto_request_tokens: true,
-          use_sandbox: false,
+          use_sandbox: true,  // Using sandbox mode for testing
           debug_log: true
         }
       });
