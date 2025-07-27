@@ -51,15 +51,16 @@ npm start
 
 ## Environment Configuration
 
-Create a `.env` file in the project root with the following variables:
+Create a `.env` file in the project root with the following variables (new naming
+used by `amazon-sp-api` v2):
 
 ```
 # Amazon SP-API Credentials
-SP_API_CLIENT_ID=your_client_id
-SP_API_CLIENT_SECRET=your_client_secret
-SP_API_REFRESH_TOKEN=your_refresh_token
-AWS_ACCESS_KEY_ID=your_aws_access_key
-AWS_SECRET_ACCESS_KEY=your_aws_secret_key
+SELLING_PARTNER_APP_CLIENT_ID=your_client_id
+SELLING_PARTNER_APP_CLIENT_SECRET=your_client_secret
+SELLING_PARTNER_REFRESH_TOKEN=your_refresh_token
+AWS_SELLING_PARTNER_ACCESS_KEY_ID=your_aws_access_key
+AWS_SELLING_PARTNER_SECRET_ACCESS_KEY=your_aws_secret_key
 AWS_SELLING_PARTNER_ROLE=your_role_arn
 
 # Region settings
@@ -69,6 +70,9 @@ MARKETPLACE_ID=your_marketplace_id
 # App settings
 PORT=3000
 ```
+
+The application also falls back to the older environment variable names
+(`SP_API_CLIENT_ID`, `SP_API_CLIENT_SECRET`, etc.) for backward compatibility.
 
 ## Usage
 
