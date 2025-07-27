@@ -10,16 +10,52 @@ class AmazonApiService {
 
   async initialize() {
     try {
-      // Initialize with environment variables directly using v2 naming convention
+      const credentials = {
+        appClientId:
+          process.env.SELLING_PARTNER_APP_CLIENT_ID ||
+          process.env.SP_API_CLIENT_ID,
+        appClientSecret:
+          process.env.SELLING_PARTNER_APP_CLIENT_SECRET ||
+          process.env.SP_API_CLIENT_SECRET,
+        refreshToken:
+          process.env.SELLING_PARTNER_REFRESH_TOKEN ||
+          process.env.SP_API_REFRESH_TOKEN,
+        accessKeyId:
+          process.env.AWS_SELLING_PARTNER_ACCESS_KEY_ID ||
+          process.env.AWS_ACCESS_KEY_ID,
+        secretAccessKey:
+          process.env.AWS_SELLING_PARTNER_SECRET_ACCESS_KEY ||
+          process.env.AWS_SECRET_ACCESS_KEY,
+        roleArn: process.env.AWS_SELLING_PARTNER_ROLE
+      };
+
+      const missing = Object.entries(credentials)
+        .filter(([key, value]) => !value && key !== 'refreshToken')
+        .map(([key]) => key);
+
+      if (missing.length) {
+        throw new Error(
+          `Missing SP-API credentials: ${missing.join(', ')}`
+        );
+      }
+
       this.spApi = new SellingPartnerAPI({
         region: process.env.SP_API_REGION?.toLowerCase() || 'na',
-        // No need to specify credentials as the library reads env vars directly
+        refresh_token: credentials.refreshToken,
+        credentials: {
+          SELLING_PARTNER_APP_CLIENT_ID: credentials.appClientId,
+          SELLING_PARTNER_APP_CLIENT_SECRET: credentials.appClientSecret,
+          AWS_ACCESS_KEY_ID: credentials.accessKeyId,
+          AWS_SECRET_ACCESS_KEY: credentials.secretAccessKey,
+          AWS_SELLING_PARTNER_ROLE: credentials.roleArn
+        },
         options: {
           auto_request_tokens: true,
           use_sandbox: false,
           debug_log: true
         }
       });
+
       this.isInitialized = true;
       logger.info('Amazon SP-API client initialized successfully');
       return true;

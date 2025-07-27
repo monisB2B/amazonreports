@@ -4,18 +4,20 @@ const logger = require('./src/utils/logger');
 
 async function testConnection() {
   try {
-    logger.info('Testing Amazon SP-API connection with v2 environment variables...');
-    
-    // The library will automatically pick up these environment variables:
-    // - SELLING_PARTNER_APP_CLIENT_ID
-    // - SELLING_PARTNER_APP_CLIENT_SECRET
-    // - SELLING_PARTNER_REFRESH_TOKEN
-    // - AWS_SELLING_PARTNER_ACCESS_KEY_ID
-    // - AWS_SELLING_PARTNER_SECRET_ACCESS_KEY
-    // - AWS_SELLING_PARTNER_ROLE
-    
+    logger.info('Testing Amazon SP-API connection...');
+
+    const credentials = {
+      SELLING_PARTNER_APP_CLIENT_ID: process.env.SELLING_PARTNER_APP_CLIENT_ID || process.env.SP_API_CLIENT_ID,
+      SELLING_PARTNER_APP_CLIENT_SECRET: process.env.SELLING_PARTNER_APP_CLIENT_SECRET || process.env.SP_API_CLIENT_SECRET,
+      AWS_ACCESS_KEY_ID: process.env.AWS_SELLING_PARTNER_ACCESS_KEY_ID || process.env.AWS_ACCESS_KEY_ID,
+      AWS_SECRET_ACCESS_KEY: process.env.AWS_SELLING_PARTNER_SECRET_ACCESS_KEY || process.env.AWS_SECRET_ACCESS_KEY,
+      AWS_SELLING_PARTNER_ROLE: process.env.AWS_SELLING_PARTNER_ROLE
+    };
+
     const spApi = new SellingPartnerAPI({
       region: process.env.SP_API_REGION?.toLowerCase() || 'na',
+      refresh_token: process.env.SELLING_PARTNER_REFRESH_TOKEN || process.env.SP_API_REFRESH_TOKEN,
+      credentials,
       options: {
         debug_log: true
       }
