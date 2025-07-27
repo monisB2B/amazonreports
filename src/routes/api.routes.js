@@ -1,6 +1,7 @@
 const express = require('express');
 const AmazonApiService = require('../services/amazon-api.service');
 const logger = require('../utils/logger');
+const config = require('../config/app-config');
 
 const router = express.Router();
 

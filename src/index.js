@@ -10,6 +10,7 @@ const salesRoutes = require('./routes/sales.routes');
 const inventoryRoutes = require('./routes/inventory.routes');
 const financeRoutes = require('./routes/finance.routes');
 const apiRoutes = require('./routes/api.routes');
+const comprehensiveReportsRoutes = require('./routes/comprehensive-reports.routes');
 
 // Create Express app
 const app = express();
@@ -27,6 +28,7 @@ app.use('/api/reports', reportRoutes);
 app.use('/api/sales', salesRoutes);
 app.use('/api/inventory', inventoryRoutes);
 app.use('/api/finance', financeRoutes);
+app.use('/api/comprehensive-reports', comprehensiveReportsRoutes);
 app.use('/api', apiRoutes);
 
 // Health check endpoint
